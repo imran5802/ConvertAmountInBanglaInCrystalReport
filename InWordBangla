@@ -1,59 +1,64 @@
 // Initialize variables
-numbervar RmVal := 0; 
-numbervar Amt := 50250220; // Example amount
-numbervar pAmt := 0; 
+numbervar RmVal := 0;  
 stringvar InWords := ""; 
+numbervar Amt := {Production_IndProductionCost.GrandTotal}; // Example amount
 
-// Round Amt to the nearest whole number
-Amt := Round(Amt, 0); 
-
-// Convert amount in crores
-If Amt >= 10000000 Then (
-    RmVal := Truncate(Amt / 10000000);
-    If RmVal > 0 Then (
-        InWords := InWords + " " + NumberToBangla(RmVal) + " কোটি";
-        Amt := Amt - RmVal * 10000000;
-    )
-);
-
-// Convert amount in lakhs
-If Amt >= 100000 Then (
-    RmVal := Truncate(Amt / 100000);
-    If RmVal > 0 Then (
-        InWords := InWords + " " + NumberToBangla(RmVal) + " লাখ"; 
-        Amt := Amt - RmVal * 100000;
-    )
-);
-
-// Convert amount in thousands
-If Amt >= 1000 Then (
-    RmVal := Truncate(Amt / 1000);
-    If RmVal > 0 Then (
-        InWords := InWords + " " + NumberToBangla(RmVal) + " হাজার"; 
-        Amt := Amt - RmVal * 1000;
-    )
-);
-
-// Convert amount in hundreds
-If Amt >= 100 Then (
-    RmVal := Truncate(Amt / 100);
-    If RmVal > 0 Then (
-        InWords := InWords + " " + NumberToBangla(RmVal) + " শত"; 
-        Amt := Amt - RmVal * 100;
-    )
-);
-
-// Convert remaining amount (less than hundred)
+//Check If Amount is Greater than 0
 If Amt > 0 Then (
-    InWords := InWords + " " + NumberToBangla(Amt);
-);
 
-// Handle fractional part
-pAmt := (Amt - Truncate(Amt)) * 100;
-If pAmt > 0 Then (
-    InWords := InWords + " এবং " + NumberToBangla(pAmt) + " পয়সা মাত্র।"
-) Else (
-    InWords := InWords + " টাকা মাত্র।"
+    numbervar pAmt := 0;
+
+    // Round Amt to the nearest whole number
+    Amt := Round(Amt, 0); 
+
+    // Convert amount in crores
+    If Amt >= 10000000 Then (
+        RmVal := Truncate(Amt / 10000000);
+        If RmVal > 0 Then (
+            InWords := InWords + " " + NumberToBangla(RmVal) + " কোটি";
+            Amt := Amt - RmVal * 10000000;
+        )
+    );
+
+    // Convert amount in lakhs
+    If Amt >= 100000 Then (
+        RmVal := Truncate(Amt / 100000);
+        If RmVal > 0 Then (
+            InWords := InWords + " " + NumberToBangla(RmVal) + " লাখ"; 
+            Amt := Amt - RmVal * 100000;
+        )
+    );
+
+    // Convert amount in thousands
+    If Amt >= 1000 Then (
+        RmVal := Truncate(Amt / 1000);
+        If RmVal > 0 Then (
+            InWords := InWords + " " + NumberToBangla(RmVal) + " হাজার"; 
+            Amt := Amt - RmVal * 1000;
+        )
+    );
+
+    // Convert amount in hundreds
+    If Amt >= 100 Then (
+        RmVal := Truncate(Amt / 100);
+        If RmVal > 0 Then (
+            InWords := InWords + " " + NumberToBangla(RmVal) + " শত"; 
+            Amt := Amt - RmVal * 100;
+        )
+    );
+
+    // Convert remaining amount (less than hundred)
+    If Amt > 0 Then (
+        InWords := InWords + " " + NumberToBangla(Amt);
+    );
+
+    // Handle fractional part
+    pAmt := (Amt - Truncate(Amt)) * 100;
+    If pAmt > 0 Then (
+        InWords := InWords + " এবং " + NumberToBangla(pAmt) + " পয়সা মাত্র।"
+    ) Else (
+        InWords := InWords + " টাকা মাত্র।"
+    );
 );
 
 // Return the final result
