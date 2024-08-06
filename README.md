@@ -1,4 +1,4 @@
-# ConvertAmountInBanglaInCrystalReport
+# Convert any Amount to Text in Bengali Language in Crystal Report
 This formula works in Crystal Report only.
 You can copy and paste this code into your crystal report.
 Change the example amount to your desired amount. You can use a table field there.
